@@ -1,16 +1,30 @@
 {
   "name": "pancake-ui",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/pancake-ui.umd.js",
+  "module": "./dist/pancake-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/pancake-ui.es.js",
+      "require": "./dist/pancake-ui.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
+    "@types/node": "^16.11.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react": "^1.0.0",
