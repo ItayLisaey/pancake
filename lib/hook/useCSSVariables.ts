@@ -1,5 +1,5 @@
-import { useMemo, useRef } from 'react'
-import { kebabCase, randomString } from '../utils/strings'
+import { useMemo, useRef } from 'react';
+import { kebabCase, randomString } from '../utils/strings';
 
 export const useCSSVariables = (vars: Record<string, string>, classPrefix = 'pancake-variables') => {
   const className = useMemo(() => `${classPrefix}-${randomString(5)}`, [classPrefix]);
@@ -15,4 +15,4 @@ export const useCSSVariables = (vars: Record<string, string>, classPrefix = 'pan
   document.head.appendChild(newStyleTag);
 
   return className;
-}
+};

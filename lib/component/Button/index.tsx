@@ -2,9 +2,6 @@
 
 export interface ButtonProps {}
 
-export const Button: React.VFC<ButtonProps> = () => {
-	
-	return (
+export const Button: React.VFC<ButtonProps> = () => (
 		<div></div>
 	);
-};
