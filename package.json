@@ -22,10 +22,10 @@
     "lint:all": "eslint --ext ts --ext tsx ."
   },
   "dependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^17.0.0"
   },
   "devDependencies": {
+    "react-dom": "^17.0.0",
     "@types/node": "^16.11.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
