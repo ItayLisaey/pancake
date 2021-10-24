@@ -18,7 +18,8 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "tsc": "tsc --noEmit",
-    "lint": "eslint --ext ts --ext tsx lib"
+    "lint": "eslint --ext ts --ext tsx lib",
+    "lint:all": "eslint --ext ts --ext tsx ."
   },
   "dependencies": {
     "react": "^17.0.0",
