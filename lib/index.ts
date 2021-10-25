@@ -1,3 +1,1 @@
-console.log('!');
-
-export { };
+export * from './component';

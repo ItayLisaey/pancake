@@ -1,7 +1,6 @@
-import path from 'path';
-
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import path, { basename } from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
@@ -20,4 +19,17 @@ export default defineConfig({
       }
     }
   },
-})
+  css: {
+    modules: {
+      generateScopedName: (name, filePath) => {
+        const matches = basename(filePath).match(/^([a-z-]+)(.module)?.scss/);
+        if (!matches) {
+          throw new Error();
+        }
+        const baseFilename = matches[1];
+        return `pcake-${baseFilename}-${name}`;
+      },
+      localsConvention: 'camelCaseOnly'
+    }
+  }
+});

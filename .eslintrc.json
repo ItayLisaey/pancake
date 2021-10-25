@@ -68,7 +68,9 @@
           "index"
         ]
       }
-    ]
+    ],
+    "import/no-named-as-default-member": "off",
+    "import/default": "off"
   },
   "settings": {
     "import/parsers": {
