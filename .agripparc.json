@@ -1,5 +1,5 @@
 {
     "$schema": "https://json.schemastore.org/agripparc-1.2.json",
-    "styling": "none",
+    "styling": "scss",
     "baseDir": "lib"
 }
