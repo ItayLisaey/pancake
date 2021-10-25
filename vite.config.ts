@@ -22,7 +22,7 @@ export default defineConfig({
   css: {
     modules: {
       generateScopedName: (name, filePath) => {
-        const matches = basename(filePath).match(/^([a-z-]+)(.module)?.scss/);
+        const matches = basename(filePath).match(/^([a-z-]+)(.module)?.s?css/);
         if (!matches) {
           throw new Error();
         }
