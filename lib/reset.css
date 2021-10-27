@@ -19,3 +19,7 @@ button.pcake {
   user-select: none;
   -webkit-user-select: none;
 }
+
+.pcake svg {
+  vertical-align: top;
+}
