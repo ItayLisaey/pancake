@@ -22,7 +22,7 @@
     "lint:all": "eslint --ext ts --ext tsx ."
   },
   "dependencies": {
-    "clsx": "^1.1.1",
+    "classnames": "^2.3.1",
     "react": "^17.0.0"
   },
   "devDependencies": {
