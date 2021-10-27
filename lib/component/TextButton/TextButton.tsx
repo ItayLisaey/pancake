@@ -1,4 +1,4 @@
-import cls from 'classnames/dedupe';
+import classNames from 'classnames/dedupe';
 import { ReactNode } from 'react';
 import { pcake } from '../../utils/strings';
 import { BaseButton, BaseButtonProps } from '../BaseButton';
@@ -19,7 +19,7 @@ export const TextButton: React.VFC<TextButtonProps> = ({ children, preText, post
 	}
 
 	return (
-		<BaseButton className={cls(pcake(), classes.root, className)} {...baseButtonProps}>
+		<BaseButton className={classNames(pcake(), classes.root, className)} {...baseButtonProps}>
 			{preText}
 			<span className={classes.children}>{children}</span>
 			{postText}
