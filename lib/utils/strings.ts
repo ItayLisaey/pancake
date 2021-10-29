@@ -8,3 +8,8 @@ export const randomString = (length: number, pool: string[] = lettersAndDigits) 
 export const kebabCase = (str: string) => str.split(/(?=[A-Z])/)
   .map(segment => segment.toLocaleLowerCase())
   .join('-');
+
+/**
+ * The global pcake class, used to distinguish pancake elements from the rest.
+ */
+export const pcake = () => 'pcake';

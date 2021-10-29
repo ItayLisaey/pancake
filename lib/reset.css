@@ -12,3 +12,14 @@
 .pcake::after {
   box-sizing: border-box;
 }
+
+button.pcake {
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pcake svg {
+  vertical-align: top;
+}

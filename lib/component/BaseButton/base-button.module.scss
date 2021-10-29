@@ -1,0 +1,15 @@
+.root {
+  border-radius: var(--curvature);
+
+  background-color: var(--primary);
+
+  transition: background-color 50ms ease-in-out;
+
+  &:hover {
+    background-color: var(--dark);
+  }
+
+  &:active {
+    background-color: var(--darker);
+  }
+}
