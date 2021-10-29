@@ -1,6 +1,4 @@
-import { BaseButton } from '../lib';
-import { IconButton } from '../lib/component/IconButton';
-import { TextButton } from '../lib/component/TextButton';
+import { BaseButton, IconButton, TextButton } from '../lib';
 import { Heli } from './Heli';
 
 function App() {
