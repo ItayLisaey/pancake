@@ -2,12 +2,11 @@ import { JSXElementConstructor } from 'react';
 import classNames from 'classnames/dedupe';
 
 import { pcake } from '../../utils/strings';
+import { HTMLElementProps } from '../../common/HTMLElementProps';
 import classes from './surface.module.scss';
 
-/** Inferred from the properties of JSX.IntrinsicElement */
-type BaseElementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
-export interface SurfaceProps extends BaseElementProps {
+export interface SurfaceProps extends HTMLElementProps {
 	component?: string | JSXElementConstructor<any>
 }
 
