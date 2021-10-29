@@ -1,7 +1,7 @@
 /*** Based on The new CSS Reset - version 1.2.0 ***/
 
 /* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property */
-.pcake:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+:where(.pcake:not(iframe, canvas, img, svg, video):not(svg *)) {
   all: unset;
   display: revert;
 }

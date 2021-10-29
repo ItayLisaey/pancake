@@ -1,4 +1,4 @@
-:global(.pcake):where(.root) {
+:where(:global(.pcake).root) {
   border-radius: var(--curvature);
   background-color: var(--primary);
 }

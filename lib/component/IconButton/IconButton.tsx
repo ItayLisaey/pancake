@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'classnames/dedupe';
 import { ReactNode } from 'react';
 import { pcake } from '../../utils/strings';
 import { BaseButton, BaseButtonProps } from '../BaseButton';

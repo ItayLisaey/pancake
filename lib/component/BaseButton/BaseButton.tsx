@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'classnames/dedupe';
 import { pcake } from '../../utils/strings';
 
 import classes from './base-button.module.scss';
