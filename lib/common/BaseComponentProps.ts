@@ -1,4 +1,4 @@
-import { Swatch } from '../theme';
+import { Swatch } from 'theme';
 
 /**
  * Base props for a Pancake component.
