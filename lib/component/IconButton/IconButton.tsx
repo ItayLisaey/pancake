@@ -1,6 +1,6 @@
 import classNames from 'classnames/dedupe';
 import { ReactNode } from 'react';
-import { pcake } from '../../utils/strings';
+import { pcake } from 'utils/strings';
 import { BaseButton, BaseButtonProps } from '../BaseButton';
 import classes from './icon-button.module.scss';
 

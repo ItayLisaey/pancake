@@ -1,7 +1,7 @@
 import { JSXElementConstructor } from 'react';
 import classNames from 'classnames/dedupe';
+import { pcake } from 'utils/strings';
 
-import { pcake } from '../../utils/strings';
 import classes from './surface.module.scss';
 
 /** Inferred from the properties of JSX.IntrinsicElement */
