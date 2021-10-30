@@ -4,13 +4,7 @@ import { pcake, toCSSVar } from 'utils';
 import { Color } from './Color';
 import { Swatch, SwatchInput } from './Swatch';
 
-export type ThemeKey = string;
-
-/** @todo change swatches to an array? */
-
 export interface Theme {
-  key: ThemeKey;
-
   swatches: Swatch[];
   success: Color;
   successLight: Color;
@@ -22,8 +16,6 @@ export interface Theme {
 export type DefaultSwatchKey = 'primary' | 'generic';
 
 export const defaultTheme: Theme = {
-  key: 'default',
-
   swatches: [
     {
       key: 'primary',
@@ -50,7 +42,7 @@ export const defaultTheme: Theme = {
 };
 
 
-export type createThemeInput = Override<Partial<Theme>, { key: ThemeKey, swatches?: SwatchInput[] }>;
+export type createThemeInput = Override<Partial<Theme>, { swatches?: SwatchInput[] }>;
 
 export function createTheme(themeInput: createThemeInput): Theme {
   /** @todo functional alternative */
@@ -61,7 +53,7 @@ export function createTheme(themeInput: createThemeInput): Theme {
 
   //------ Initialize variables ------//
 
-  const { key: themeKey, swatches } = theme;
+  const { swatches } = theme;
 
   /** Turns a Swatch object into a list of CSSVarTuples */
   const swatchToVariables = (swatch: Swatch, swatchKey = swatch.key) =>
@@ -70,18 +62,18 @@ export function createTheme(themeInput: createThemeInput): Theme {
       .filter(([k]) => k !== 'key')
       // map to varname-value tuples
       .map(
-        ([key, value]) => [`${pcake()}-${themeKey}-color-${swatchKey}-${key}`, value]
+        ([key, value]) => [`${pcake()}-color-${swatchKey}-${key}`, value]
       ) as CSSVarTuple[];
 
   /** @todo consider the case of a swatch keyed 'success' or 'error' overriding these variables. */
   const cssVarTuples: CSSVarTuple[] = [
     ...swatches.flatMap(swatch => swatchToVariables(swatch)),
     ...swatchToVariables(swatches[0], '0'),
-    [`${pcake()}-${themeKey}-color-success`, theme.success],
-    [`${pcake()}-${themeKey}-color-success-light`, theme.successLight],
-    [`${pcake()}-${themeKey}-color-error`, theme.error],
-    [`${pcake()}-${themeKey}-color-error-light`, theme.errorLight],
-    [`${pcake()}-${themeKey}-curvature`, theme.curvature],
+    [`${pcake()}-color-success`, theme.success],
+    [`${pcake()}-color-success-light`, theme.successLight],
+    [`${pcake()}-color-error`, theme.error],
+    [`${pcake()}-color-error-light`, theme.errorLight],
+    [`${pcake()}-curvature`, theme.curvature],
   ];
 
   const cssVarsString = cssVarTuples.map(toCSSVar).join('\n');
@@ -90,12 +82,10 @@ export function createTheme(themeInput: createThemeInput): Theme {
 
   const newStyleTag = document.createElement('style');
   document.head.appendChild(newStyleTag);
-  newStyleTag.setAttribute('data-pcake-theme', themeKey);
+  newStyleTag.setAttribute('data-pcake-theme', '');
   newStyleTag.sheet!.insertRule(`:root {\n${cssVarsString}\n}`);
 
   return theme;
 }
 
-createTheme({
-  key: 'default'
-});
+createTheme({});
