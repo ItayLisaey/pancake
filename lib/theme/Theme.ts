@@ -91,7 +91,7 @@ export function createTheme(themeInput: createThemeInput): Theme {
   const newStyleTag = document.createElement('style');
   document.head.appendChild(newStyleTag);
   newStyleTag.setAttribute('data-pcake-theme', themeKey);
-  newStyleTag.innerHTML = (`:root {\n${cssVarsString}\n}`);
+  newStyleTag.sheet!.insertRule(`:root {\n${cssVarsString}\n}`);
 
   return theme;
 }
