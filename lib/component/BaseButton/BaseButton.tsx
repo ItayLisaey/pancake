@@ -15,9 +15,9 @@ export const BaseButton: React.VFC<BaseButtonProps> = ({ className, swatch: swat
 	const [swatch, isDefault] = useSwatch(swatchKey);
 
 	const cssVars = useMemo(() => (isDefault ? {} : {
-		'pcakeBaseButtonPrimary': swatch.primary,
-		'pcakeBaseButtonDark': swatch.dark,
-		'pcakeBaseButtonDarker': swatch.darker,
+		'pcakeBaseButtonBase': swatch.primary,
+		'pcakeBaseButtonHover': swatch.dark,
+		'pcakeBaseButtonActive': swatch.darker,
 	}) as Record<string, string>, [swatch, isDefault]);
 
 	const cssVarsClass = useCSSVariables(cssVars);
