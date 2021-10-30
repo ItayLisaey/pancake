@@ -42,11 +42,10 @@ export const defaultTheme: Theme = {
       darker: 'hsl(234, 5%, 10%)'
     }
   ],
-  /** @todo convert to hsl */
-  success: '#72C37A',
-  successLight: '#BDF1C2',
-  error: '#FF5C58',
-  errorLight: '#FFA9A7',
+  success: 'hsl(126, 41%, 61%)',
+  successLight: 'hsl(126, 65%, 84%)',
+  error: 'hsl(1, 100%, 67%)',
+  errorLight: 'hsl(1, 100%, 83%)',
   curvature: '0.5rem'
 };
 
