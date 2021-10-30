@@ -8,10 +8,6 @@ export const randomString = (length: number, pool: string[] = lettersAndDigits):
   .map(() => pool[randomInt(0, pool.length - 1)])
   .join('');
 
-export const kebabCase = (str: string) => str.split(/(?=[A-Z])/)
-  .map(segment => segment.toLocaleLowerCase())
-  .join('-');
-
 /**
  * The global pcake class, used to distinguish pancake elements from the rest.
  */
@@ -24,3 +20,12 @@ export const kebab = (...strings: string[]): string => strings
   .flatMap(s => s.split(/-|(?=[A-Z])/))
   .map(s => s.toLowerCase())
   .join('-');
+
+export const cssRule = (selector: string, properties: Record<string, string>) => {
+  const body = Object.entries(properties)
+    .map(([key, value]) => [kebab(key), value] as [string, string])
+    .map(toCSSVar)
+    .join('\n');
+
+  return `${selector} {\n${body}\n}`;
+};

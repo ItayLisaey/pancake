@@ -1,6 +1,6 @@
-import { CSSVarTuple, Override } from 'common/types';
+import { Override } from 'common/types';
 import { createSwatch } from 'theme';
-import { kebab, pcake, toCSSVar } from 'utils';
+import { cssRule, kebab, mapEntries, merge, omit, pcake } from 'utils';
 import { Color } from './Color';
 import { Swatch, SwatchInput } from './Swatch';
 
@@ -55,35 +55,30 @@ export function createTheme(themeInput: createThemeInput): Theme {
 
   const { swatches } = theme;
 
-  /** Turns a Swatch object into a list of CSSVarTuples */
+  /** Turns a Swatch object into a record of CSS variable  */
   const swatchToVariables = (swatch: Swatch, swatchKey = swatch.key) =>
-    Object.entries(swatch)
-      // filter out any non-variable properties
-      .filter(([k]) => k !== 'key')
-      // map to varname-value tuples
-      .map(
-        ([key, value]) => [kebab(pcake, 'color', swatchKey, key), value]
-      ) as CSSVarTuple[];
+    mapEntries(
+      omit(swatch, 'key'),
+      ([key, value]) => [kebab(pcake, 'color', swatchKey, key), value]
+    );
 
   /** @todo consider the case of a swatch keyed 'success' or 'error' overriding these variables. */
-  const cssVarTuples: CSSVarTuple[] = [
-    ...swatches.flatMap(swatch => swatchToVariables(swatch)),
+  const cssVars: Record<string, string> = {
+    ...merge(...swatches.map(swatch => swatchToVariables(swatch))),
     ...swatchToVariables(swatches[0], '0'),
-    [kebab(pcake, 'color', 'success'), theme.success],
-    [kebab(pcake, 'color', 'success-light'), theme.successLight],
-    [kebab(pcake, 'color', 'error'), theme.error],
-    [kebab(pcake, 'color', 'error-light'), theme.errorLight],
-    [kebab(pcake, 'curvature'), theme.curvature],
-  ];
-
-  const cssVarsString = cssVarTuples.map(toCSSVar).join('\n');
+    [kebab(pcake, 'color', 'success')]: theme.success,
+    [kebab(pcake, 'color', 'success-light')]: theme.successLight,
+    [kebab(pcake, 'color', 'error')]: theme.error,
+    [kebab(pcake, 'color', 'error-light')]: theme.errorLight,
+    [kebab(pcake, 'curvature')]: theme.curvature,
+  };
 
   //------ Inject into HTML ------//
 
   const newStyleTag = document.createElement('style');
   document.head.appendChild(newStyleTag);
   newStyleTag.setAttribute(`data-${pcake}-theme`, '');
-  newStyleTag.sheet!.insertRule(`:root {\n${cssVarsString}\n}`);
+  newStyleTag.innerHTML = cssRule(':root', cssVars);
 
   return theme;
 }

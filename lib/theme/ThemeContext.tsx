@@ -37,5 +37,6 @@ export const useSwatch = (key?: SwatchKey): [swatch: Swatch, isDefault: boolean]
     );
   }
 
+
   return [swatch ?? defaultSwatch, !swatch || (swatch.key === defaultSwatch.key)];
 };
