@@ -1,18 +1,26 @@
 import { useEffect, useMemo } from 'react';
-import { kebabCase, pcake, randomString } from 'utils/strings';
+import { kebabCase, pcake, randomString, toCSSVar } from 'utils/strings';
 
 export const useCSSVariables = (vars: Record<string, string>, classPrefix = `${pcake()}-vars`) => {
   const className = useMemo(() => `${classPrefix}-${randomString(5)}`, [classPrefix]);
 
+  const styleTag = useMemo(() => document.createElement('style'), []);
+  // Inject styleTag to the head
   useEffect(() => {
-    const styleTag = document.createElement('style');
     document.head.appendChild(styleTag);
-
-    const cssRules = Object.values(vars).map(([key, value]) => `--${kebabCase(key)}: ${value};`).join('\n');
-    styleTag.sheet!.insertRule(`.${className} {\n${cssRules}\n}`);
-
     return () => styleTag.remove();
-  }, [className, vars]);
+  }, [styleTag]);
+
+  useEffect(() => {
+    const cssRules = Object.entries(vars)
+      .map(([key, value]) => [kebabCase(key), value] as [string, string])
+      .map(toCSSVar)
+      .join('\n');
+
+    styleTag.sheet?.insertRule(`.${className} {\n${cssRules}\n}`);
+
+    return () => styleTag.sheet?.deleteRule(0);
+  }, [styleTag, className, vars]);
 
   return className;
 };

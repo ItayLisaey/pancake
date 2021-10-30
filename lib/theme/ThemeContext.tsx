@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react';
+import { Swatch } from 'theme';
 import { defaultTheme, Theme } from './Theme';
 import { SwatchKey } from './Swatch';
 
@@ -20,11 +21,11 @@ export const useTheme = () => useContext(ThemeContext);
  * Returns a Swatch by its key.
  * Note that the swatch must be registered on a Theme and provided by a ThemeProvider.
  */
-export const useSwatch = (key?: SwatchKey) => {
+export const useSwatch = (key?: SwatchKey): [swatch: Swatch, isDefault: boolean] => {
   const theme = useTheme();
   const { swatches } = theme;
 
-  const swatch = useMemo(() => key && swatches.find(s => s.key === key), [swatches, key]);
+  const swatch = useMemo(() => key ? swatches.find(s => s.key === key) : undefined, [swatches, key]);
   const defaultSwatch = useMemo(() => swatches[0], [swatches]);
 
   if (key && !swatch) {
@@ -36,5 +37,10 @@ export const useSwatch = (key?: SwatchKey) => {
     );
   }
 
-  return swatch ?? defaultSwatch;
+  return [swatch ?? defaultSwatch, swatch === defaultSwatch];
+};
+
+export const useSwatchClass = (key?: SwatchKey) => {
+  const theme = useTheme();
+  const { swatches } = theme;
 };

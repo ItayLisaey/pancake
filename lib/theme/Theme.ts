@@ -27,11 +27,11 @@ export const defaultTheme: Theme = {
   swatches: [
     {
       key: 'primary',
-      lighter: 'hsl(265, 27%, 15%)',
-      light: 'hsl(265, 27%, 25%)',
+      lighter: 'hsl(265, 27%, 85%)',
+      light: 'hsl(265, 27%, 75%)',
       primary: 'hsl(265, 27%, 42%)',
-      dark: 'hsl(265, 27%, 75%)',
-      darker: 'hsl(265, 27%, 85%)'
+      dark: 'hsl(265, 27%, 25%)',
+      darker: 'hsl(265, 27%, 15%)'
     },
     {
       key: 'generic',
@@ -64,18 +64,19 @@ export function createTheme(themeInput: createThemeInput): Theme {
   const { key: themeKey, swatches } = theme;
 
   /** Turns a Swatch object into a list of CSSVarTuples */
-  const swatchToVariables = (swatch: Swatch) =>
+  const swatchToVariables = (swatch: Swatch, swatchKey = swatch.key) =>
     Object.entries(swatch)
       // filter out any non-variable properties
       .filter(([k]) => k !== 'key')
       // map to varname-value tuples
       .map(
-        ([key, value]) => [`${pcake()}-${themeKey}-color-${swatch.key}-${key}`, value]
+        ([key, value]) => [`${pcake()}-${themeKey}-color-${swatchKey}-${key}`, value]
       ) as CSSVarTuple[];
 
   /** @todo consider the case of a swatch keyed 'success' or 'error' overriding these variables. */
   const cssVarTuples: CSSVarTuple[] = [
-    ...swatches.flatMap(swatchToVariables),
+    ...swatches.flatMap(swatch => swatchToVariables(swatch)),
+    ...swatchToVariables(swatches[0], '0'),
     [`${pcake()}-${themeKey}-color-success`, theme.success],
     [`${pcake()}-${themeKey}-color-success-light`, theme.successLight],
     [`${pcake()}-${themeKey}-color-error`, theme.error],
@@ -94,3 +95,7 @@ export function createTheme(themeInput: createThemeInput): Theme {
 
   return theme;
 }
+
+createTheme({
+  key: 'default'
+});

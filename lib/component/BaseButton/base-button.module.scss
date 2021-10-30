@@ -1,15 +1,15 @@
 :where(:global(.pcake).root) {
   border-radius: var(--curvature);
 
-  background-color: var(--base-button-primary, var(--primary));
+  background-color: var(--pcake-base-button-primary, var(--pcake-default-color-0-primary));
 
   transition: background-color 50ms ease-in-out;
 
   &:hover {
-    background-color: var(--base-button-dark, var(--dark));
+    background-color: var(--pcake-base-button-dark, var(--pcake-default-color-0-dark));
   }
 
   &:active {
-    background-color: var(--base-button-darker, var(--darker));
+    background-color: var(--pcake-base-button-darker, var(--pcake-default-color-0-darker));
   }
 }
