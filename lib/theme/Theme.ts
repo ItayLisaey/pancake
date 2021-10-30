@@ -1,6 +1,6 @@
 import { CSSVarTuple, Override } from 'common/types';
 import { createSwatch } from 'theme';
-import { pcake, toCSSVar } from 'utils';
+import { kebab, pcake, toCSSVar } from 'utils';
 import { Color } from './Color';
 import { Swatch, SwatchInput } from './Swatch';
 
@@ -62,18 +62,18 @@ export function createTheme(themeInput: createThemeInput): Theme {
       .filter(([k]) => k !== 'key')
       // map to varname-value tuples
       .map(
-        ([key, value]) => [`${pcake}-color-${swatchKey}-${key}`, value]
+        ([key, value]) => [kebab(pcake, 'color', swatchKey, key), value]
       ) as CSSVarTuple[];
 
   /** @todo consider the case of a swatch keyed 'success' or 'error' overriding these variables. */
   const cssVarTuples: CSSVarTuple[] = [
     ...swatches.flatMap(swatch => swatchToVariables(swatch)),
     ...swatchToVariables(swatches[0], '0'),
-    [`${pcake}-color-success`, theme.success],
-    [`${pcake}-color-success-light`, theme.successLight],
-    [`${pcake}-color-error`, theme.error],
-    [`${pcake}-color-error-light`, theme.errorLight],
-    [`${pcake}-curvature`, theme.curvature],
+    [kebab(pcake, 'color', 'success'), theme.success],
+    [kebab(pcake, 'color', 'success-light'), theme.successLight],
+    [kebab(pcake, 'color', 'error'), theme.error],
+    [kebab(pcake, 'color', 'error-light'), theme.errorLight],
+    [kebab(pcake, 'curvature'), theme.curvature],
   ];
 
   const cssVarsString = cssVarTuples.map(toCSSVar).join('\n');
@@ -82,7 +82,7 @@ export function createTheme(themeInput: createThemeInput): Theme {
 
   const newStyleTag = document.createElement('style');
   document.head.appendChild(newStyleTag);
-  newStyleTag.setAttribute('data-pcake-theme', '');
+  newStyleTag.setAttribute(`data-${pcake}-theme`, '');
   newStyleTag.sheet!.insertRule(`:root {\n${cssVarsString}\n}`);
 
   return theme;

@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from 'react';
-import { kebabCase, pcake, randomString, toCSSVar } from 'utils/strings';
+import { kebab, kebabCase, pcake, randomString, toCSSVar } from 'utils/strings';
 
-export const useCSSVariables = (vars: Record<string, string>, classPrefix = `${pcake}-vars`) => {
-  const className = useMemo(() => `${classPrefix}-${randomString(5)}`, [classPrefix]);
+export const useCSSVariables = (vars: Record<string, string>, classPrefix = kebab(pcake, 'vars')) => {
+  const className = useMemo(() => kebab(classPrefix, randomString(5)), [classPrefix]);
 
   const styleTag = useMemo(() => document.createElement('style'), []);
   // Inject styleTag to the head

@@ -18,3 +18,9 @@ export const kebabCase = (str: string) => str.split(/(?=[A-Z])/)
 export const pcake = 'pcake';
 
 export const toCSSVar = ([varname, value]: CSSVarTuple) => `--${varname}: ${value};`;
+
+/** Turns all strings passed to kebab-case and joins them. */
+export const kebab = (...strings: string[]): string => strings
+  .flatMap(s => s.split(/-|(?=[A-Z])/))
+  .map(s => s.toLowerCase())
+  .join('-');
