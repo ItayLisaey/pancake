@@ -15,6 +15,6 @@ export const kebabCase = (str: string) => str.split(/(?=[A-Z])/)
 /**
  * The global pcake class, used to distinguish pancake elements from the rest.
  */
-export const pcake = () => 'pcake';
+export const pcake = 'pcake';
 
 export const toCSSVar = ([varname, value]: CSSVarTuple) => `--${varname}: ${value};`;

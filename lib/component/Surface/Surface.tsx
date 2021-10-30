@@ -23,6 +23,6 @@ export const Surface: React.VFC<SurfaceProps> = ({ component: Component = 'div',
 	const cssVarsClass = useCSSVariables(cssVars);
 
 	return (
-		<Component className={classNames(pcake(), cssVarsClass, classes.root, className)} {...props} />
+		<Component className={classNames(pcake, cssVarsClass, classes.root, className)} {...props} />
 	);
 };

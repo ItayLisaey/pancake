@@ -62,18 +62,18 @@ export function createTheme(themeInput: createThemeInput): Theme {
       .filter(([k]) => k !== 'key')
       // map to varname-value tuples
       .map(
-        ([key, value]) => [`${pcake()}-color-${swatchKey}-${key}`, value]
+        ([key, value]) => [`${pcake}-color-${swatchKey}-${key}`, value]
       ) as CSSVarTuple[];
 
   /** @todo consider the case of a swatch keyed 'success' or 'error' overriding these variables. */
   const cssVarTuples: CSSVarTuple[] = [
     ...swatches.flatMap(swatch => swatchToVariables(swatch)),
     ...swatchToVariables(swatches[0], '0'),
-    [`${pcake()}-color-success`, theme.success],
-    [`${pcake()}-color-success-light`, theme.successLight],
-    [`${pcake()}-color-error`, theme.error],
-    [`${pcake()}-color-error-light`, theme.errorLight],
-    [`${pcake()}-curvature`, theme.curvature],
+    [`${pcake}-color-success`, theme.success],
+    [`${pcake}-color-success-light`, theme.successLight],
+    [`${pcake}-color-error`, theme.error],
+    [`${pcake}-color-error-light`, theme.errorLight],
+    [`${pcake}-curvature`, theme.curvature],
   ];
 
   const cssVarsString = cssVarTuples.map(toCSSVar).join('\n');

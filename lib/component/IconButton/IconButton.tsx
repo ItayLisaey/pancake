@@ -9,5 +9,5 @@ export interface IconButtonProps extends BaseButtonProps {
 }
 
 export const IconButton: React.VFC<IconButtonProps> = ({ className, ...baseButtonProps }) => (
-	<BaseButton className={classNames(pcake(), classes.root, className)} {...baseButtonProps} />
+	<BaseButton className={classNames(pcake, classes.root, className)} {...baseButtonProps} />
 );

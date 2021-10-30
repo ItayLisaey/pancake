@@ -24,6 +24,6 @@ export const BaseButton: React.VFC<BaseButtonProps> = ({ className, swatch: swat
 
 
 	return (
-		<button className={classNames(pcake(), cssVarsClass, classes.root, className)} {...buttonProps} />
+		<button className={classNames(pcake, cssVarsClass, classes.root, className)} {...buttonProps} />
 	);
 };

@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { kebabCase, pcake, randomString, toCSSVar } from 'utils/strings';
 
-export const useCSSVariables = (vars: Record<string, string>, classPrefix = `${pcake()}-vars`) => {
+export const useCSSVariables = (vars: Record<string, string>, classPrefix = `${pcake}-vars`) => {
   const className = useMemo(() => `${classPrefix}-${randomString(5)}`, [classPrefix]);
 
   const styleTag = useMemo(() => document.createElement('style'), []);
