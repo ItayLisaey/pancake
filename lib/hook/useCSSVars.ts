@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { usePreRenderEffect } from 'hook';
 import { cssRule, kebab, pcake, randomString } from 'utils/strings';
 
@@ -17,7 +17,7 @@ export const useCSSVars = (vars: Record<string, string>, {
   document.head.appendChild(styleTag);
 
   // Inject styleTag to the head
-  usePreRenderEffect(() => () => styleTag.remove(), [styleTag]);
+  useEffect(() => () => styleTag.remove(), [styleTag]);
 
   // Insert the rule to the style
   usePreRenderEffect(() => {
