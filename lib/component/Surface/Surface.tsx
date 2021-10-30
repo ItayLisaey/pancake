@@ -1,16 +1,22 @@
 import { JSXElementConstructor } from 'react';
 import classNames from 'classnames/dedupe';
 import { pcake } from 'utils/strings';
-
+import { HTMLElementProps } from 'common/HTMLElementProps';
+import { BaseComponentProps } from 'common';
+import { useThemeBinding } from 'hook';
 import classes from './surface.module.scss';
 
-/** Inferred from the properties of JSX.IntrinsicElement */
-type BaseElementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-
-export interface SurfaceProps extends BaseElementProps {
+export interface SurfaceProps extends HTMLElementProps, BaseComponentProps {
 	component?: string | JSXElementConstructor<any>
 }
 
-export const Surface: React.VFC<SurfaceProps> = ({ component: Component = 'div', className, ...props }) => (
-	<Component className={classNames(pcake(), classes.root, className)} {...props} />
-);
+export const Surface: React.VFC<SurfaceProps> = ({ component: Component = 'div', className, swatch: swatchKey, ...props }) => {
+	const cssVarsClass = useThemeBinding('Surface', swatchKey, (swatch, theme) => ({
+		background: swatch.lighter,
+		curvature: theme.curvature
+	}));
+
+	return (
+		<Component className={classNames(pcake, cssVarsClass, classes.root, className)} {...props} />
+	);
+};

@@ -19,7 +19,7 @@ export const TextButton: React.VFC<TextButtonProps> = ({ children, preText, post
 	}
 
 	return (
-		<BaseButton className={classNames(pcake(), classes.root, className)} {...baseButtonProps}>
+		<BaseButton className={classNames(pcake, classes.root, className)} {...baseButtonProps}>
 			{preText}
 			<span className={classes.children}>{children}</span>
 			{postText}
