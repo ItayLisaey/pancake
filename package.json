@@ -22,8 +22,7 @@
     "lint:all": "eslint --ext ts --ext tsx ."
   },
   "dependencies": {
-    "classnames": "^2.3.1",
-    "react": "^17.0.0"
+    "classnames": "^2.3.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.1",
@@ -44,5 +43,8 @@
     "typescript": "^4.3.2",
     "vite": "^2.6.4",
     "vite-tsconfig-paths": "^3.3.17"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
   }
 }
