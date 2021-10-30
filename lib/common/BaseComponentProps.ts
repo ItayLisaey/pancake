@@ -1,8 +1,8 @@
-import { Swatch } from 'theme';
+import { Swatch, SwatchKey } from 'theme';
 
 /**
  * Base props for a Pancake component.
  */
  export interface BaseComponentProps {
-   swatch: Swatch
+   swatch?: SwatchKey | Swatch
 }

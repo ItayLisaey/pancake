@@ -1,5 +1,10 @@
+import { createTheme } from 'theme';
 import { BaseButton, IconButton, Surface, TextButton } from '../lib';
 import { Heli } from './Heli';
+
+const theme = createTheme({
+  key: 'mytheme',
+});
 
 function App() {
   return (
