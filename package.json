@@ -15,10 +15,12 @@
   },
   "scripts": {
     "dev": "vite",
+    "prebuild": "rimraf lib",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "tsc": "tsc --noEmit",
-    "lint": "eslint --ext ts --ext tsx ."
+    "lint": "eslint --ext ts --ext tsx .",
+    "preversion": "yarn lint && yarn build"
   },
   "dependencies": {
     "classnames": "^2.3.1"
