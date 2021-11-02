@@ -8,8 +8,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'lib/index.ts'),
-      name: 'pancake-ui',
-      fileName: format => `pancake-ui.${format}.js`
+      name: 'pcake',
+      fileName: format => `pcake.${format}.js`
     },
     rollupOptions: {
       external: ['react'],
