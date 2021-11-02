@@ -1,6 +1,6 @@
 {
   "name": "pcake",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "files": [
     "dist"
@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "rimraf dist",
-    "build": "(tsc -p tsconfig.build.json) && vite build",
+    "build": "tsc && vite build",
     "serve": "vite preview",
     "tsc": "tsc --noEmit",
     "lint": "eslint --ext ts --ext tsx .",
@@ -39,12 +39,12 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.1-alpha-9c8161ba8-20211028",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "react": "^17.0.2",
     "react-dom": "^17.0.0",
     "sass": "^1.43.3",
     "typescript": "^4.3.2",
     "vite": "^2.6.4",
-    "vite-tsconfig-paths": "^3.3.17",
-    "react": "^17.0.2"
+    "vite-tsconfig-paths": "^3.3.17"
   },
   "peerDependencies": {
     "react": "^17.0.2"
