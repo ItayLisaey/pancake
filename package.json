@@ -20,18 +20,26 @@
     "serve": "vite preview",
     "tsc": "tsc --noEmit",
     "lint": "eslint --ext ts --ext tsx .",
-    "preversion": "yarn lint && yarn build"
+    "preversion": "yarn lint && yarn build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "classnames": "^2.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/react": "^6.3.12",
     "@types/node": "^16.11.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "@vitejs/plugin-react": "^1.0.0",
+    "babel-loader": "^8.2.3",
     "eslint": "^8.0.1",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.2",
