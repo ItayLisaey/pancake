@@ -6,6 +6,7 @@
     "dist"
   ],
   "main": "./dist/pcake.umd.js",
+  "types": "./dist/pcake.d.ts",
   "module": "./dist/pcake.es.js",
   "exports": {
     ".": {
@@ -15,20 +16,26 @@
   },
   "scripts": {
     "dev": "vite",
+    "prebuild:dts": "rimraf .temp",
+    "build:dts": "rollup -c dts.config.js",
+    "postbuild:dts": "rimraf .temp",
     "prebuild": "rimraf dist",
-    "build": "tsc && vite build",
+    "build": "vite build && yarn build:dts",
     "serve": "vite preview",
-    "tsc": "tsc --noEmit",
+    "tsc": "tsc",
     "lint": "eslint --ext ts --ext tsx .",
     "preversion": "yarn lint && yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "vite-plugin-dts": "^0.9.6"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@rollup/plugin-alias": "^3.1.8",
+    "@rollup/plugin-replace": "^3.0.0",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
@@ -49,7 +56,11 @@
     "eslint-plugin-unused-imports": "^1.1.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.0",
+    "rollup-plugin-cleaner": "^1.0.0",
+    "rollup-plugin-dts": "^4.0.1",
+    "rollup-plugin-typescript2": "^0.31.1",
     "sass": "^1.43.3",
+    "tslib": "^2.3.1",
     "typescript": "^4.3.2",
     "vite": "^2.6.4",
     "vite-tsconfig-paths": "^3.3.17"
