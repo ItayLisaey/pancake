@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { useVarDeclaration } from 'hook';
 import { Swatch, SwatchKey, Theme, useSwatch, useTheme } from 'theme';
 import { kebab, mapEntries, pcake } from 'utils';
+import { useVarDeclaration } from './useVarDeclaration';
 
 /**
  * Configures a binding between the given Swatch (or the default if not key is provided) and the current Theme
