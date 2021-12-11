@@ -7,6 +7,7 @@ import typescript from 'rollup-plugin-typescript2';
 import alias from '@rollup/plugin-alias';
 import replace from '@rollup/plugin-replace';
 import postcss from 'rollup-plugin-postcss';
+import { terser } from 'rollup-plugin-terser';
 // import { terser } from 'rollup-plugin-terser';
 
 const lib = join(__dirname, 'lib');
@@ -30,16 +31,19 @@ const pathAliases = readdirSync(lib, { withFileTypes: true })
   ]
   );
 
+const externals = ['react', 'react-dom', 'react/jsx-runtime', 'classnames/dedupe'];
+
 const globals = {
   react: 'React',
-  'react-dom': 'ReactDOM'
+  'react-dom': 'ReactDOM',
+  'react/jsx-runtime': 'jsx'
 };
 
 export default defineConfig([
   {
     // Main build step
-    input: 'lib/index.ts',
-    external: ['react', 'react-dom'],
+    input: join(lib, 'index.ts'),
+    external: externals,
     plugins: [
       typescript({
         useTsconfigDeclarationDir: true
@@ -48,7 +52,7 @@ export default defineConfig([
         modules: true,
         extract: false
       }),
-      //terser()
+      terser()
     ],
 
     output: [{
@@ -86,5 +90,29 @@ export default defineConfig([
       }),
       dts()
     ]
+  },
+  {
+    // Extract bundled css (for potential SSR support)
+    input: join(lib, 'index.ts'),
+    external: externals,
+
+    plugins: [
+      typescript({
+        check: false,
+        useTsconfigDeclarationDir: true,
+        tsconfigOverride: {
+          noEmit: true,
+          declaration: false
+        }
+      }),
+      postcss({
+        modules: true,
+        extract: true
+      }),
+    ],
+
+    output: {
+      file: join(dist, 'pcake.css')
+    }
   }
 ]);
