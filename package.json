@@ -16,11 +16,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "prebuild:dts": "rimraf .temp",
-    "build:dts": "rollup -c dts.config.js",
-    "postbuild:dts": "rimraf .temp",
-    "prebuild": "rimraf dist",
-    "build": "vite build && yarn build:dts",
+    "prebuild": "rimraf dist && rimraf .temp",
+    "build": "rollup -c rollup.config.js",
+    "postbuild": "rimraf .temp",
     "serve": "vite preview",
     "tsc": "tsc",
     "lint": "eslint --ext ts --ext tsx .",
@@ -30,6 +28,7 @@
   },
   "dependencies": {
     "classnames": "^2.3.1",
+    "rollup-plugin-terser": "^7.0.2",
     "vite-plugin-dts": "^0.9.6"
   },
   "devDependencies": {
@@ -54,10 +53,11 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.1-alpha-9c8161ba8-20211028",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "postcss": "^8.4.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.0",
-    "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-dts": "^4.0.1",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
     "sass": "^1.43.3",
     "tslib": "^2.3.1",

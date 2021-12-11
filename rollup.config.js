@@ -6,8 +6,11 @@ import dts from 'rollup-plugin-dts';
 import typescript from 'rollup-plugin-typescript2';
 import alias from '@rollup/plugin-alias';
 import replace from '@rollup/plugin-replace';
+import postcss from 'rollup-plugin-postcss';
+// import { terser } from 'rollup-plugin-terser';
 
 const lib = join(__dirname, 'lib');
+const dist = join(__dirname, 'dist');
 
 /** Alias every directory under `lib`, so that "baseUrl" paths are replaced with actual paths. */
 
@@ -27,24 +30,45 @@ const pathAliases = readdirSync(lib, { withFileTypes: true })
   ]
   );
 
+const globals = {
+  react: 'React',
+  'react-dom': 'ReactDOM'
+};
+
 export default defineConfig([
   {
-    // Run tsc and create type definitions
+    // Main build step
     input: 'lib/index.ts',
-    external: ['react'],
+    external: ['react', 'react-dom'],
     plugins: [
-      typescript({})
+      typescript({
+        useTsconfigDeclarationDir: true
+      }),
+      postcss({
+        modules: true,
+        extract: false
+      }),
+      //terser()
     ],
 
-    output: {
-      dir: '.temp'
-    }
+    output: [{
+      file: join(dist, 'pcake.es.js'),
+      format: 'es',
+      name: 'pcake',
+      globals
+
+    }, {
+      file: join(dist, 'pcake.umd.js'),
+      format: 'umd',
+      name: 'pcake',
+      globals
+    }]
   },
   {
     // Bundle d.ts files into one
     input: '.temp/lib/index.d.ts',
     output: {
-      file: 'dist/index.d.ts',
+      file: join(dist, 'index.d.ts'),
       format: 'es',
       globals: {
         react: 'React'
@@ -56,6 +80,7 @@ export default defineConfig([
       }),
       replace({
         "import './reset.css'": '',
+        'createTheme({})': '',
         delimiters: ['', ''],
         preventAssignment: true,
       }),

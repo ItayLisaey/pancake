@@ -18,10 +18,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "declarationDir": ".temp",
     "jsx": "react-jsx",
-    "baseUrl": "lib"
+    "baseUrl": "lib",
   },
   "include": [
     "src",
