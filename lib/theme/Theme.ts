@@ -1,8 +1,7 @@
 import { Override } from 'common/types';
-import { createSwatch } from 'theme';
 import { cssRule, kebab, mapEntries, merge, omit, pcake } from 'utils';
+import { createSwatch , Swatch, SwatchInput } from './Swatch';
 import { Color } from './Color';
-import { Swatch, SwatchInput } from './Swatch';
 
 export interface Theme {
   swatches: Swatch[];

@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
-import { usePreRenderEffect } from 'hook';
 import { cssRule, kebab, pcake, randomString } from 'utils/strings';
+import { usePreRenderEffect } from './usePreRenderEffect';
 
 export interface useCSSVarsOptions {
   classPrefix?: string;

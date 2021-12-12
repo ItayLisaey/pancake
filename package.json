@@ -1,11 +1,12 @@
 {
   "name": "pcake",
-  "version": "0.1.1",
+  "version": "0.1.5",
   "license": "MIT",
   "files": [
     "dist"
   ],
   "main": "./dist/pcake.umd.js",
+  "types": "./dist/pcake.d.ts",
   "module": "./dist/pcake.es.js",
   "exports": {
     ".": {
@@ -15,11 +16,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "prebuild": "rimraf dist",
-    "build": "tsc && vite build",
+    "prebuild": "rimraf dist && rimraf .temp",
+    "build": "rollup -c rollup.config.js",
+    "postbuild": "rimraf .temp",
     "serve": "vite preview",
-    "tsc": "tsc --noEmit",
-    "lint": "eslint --ext ts --ext tsx .",
+    "tsc": "tsc",
+    "lint": "eslint --ext ts,tsx lib src",
     "preversion": "yarn lint && yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -29,6 +31,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@rollup/plugin-alias": "^3.1.8",
+    "@rollup/plugin-replace": "^3.0.0",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
@@ -47,9 +51,15 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.1-alpha-9c8161ba8-20211028",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "postcss": "^8.4.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.0",
+    "rollup-plugin-dts": "^4.0.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.1",
     "sass": "^1.43.3",
+    "tslib": "^2.3.1",
     "typescript": "^4.3.2",
     "vite": "^2.6.4",
     "vite-tsconfig-paths": "^3.3.17"
