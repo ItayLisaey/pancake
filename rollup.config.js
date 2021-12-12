@@ -1,5 +1,5 @@
 //@ts-check
-import { join, resolve } from 'path';
+import { basename, join, resolve } from 'path';
 import { readdirSync } from 'fs';
 import { defineConfig } from 'rollup';
 import dts from 'rollup-plugin-dts';
@@ -8,7 +8,6 @@ import alias from '@rollup/plugin-alias';
 import replace from '@rollup/plugin-replace';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
-// import { terser } from 'rollup-plugin-terser';
 
 const lib = join(__dirname, 'lib');
 const dist = join(__dirname, 'dist');
@@ -39,6 +38,18 @@ const globals = {
   'react/jsx-runtime': 'jsx'
 };
 
+const modulesOptions = {
+  generateScopedName: (name, filePath) => {
+    const matches = basename(filePath).match(/^([a-z-]+)(.module)?.s?css/);
+    if (!matches) {
+      throw new Error();
+    }
+    const baseFilename = matches[1];
+    return `pcake-${baseFilename}-${name}`;
+  },
+  localsConvention: 'camelCaseOnly'
+};
+
 export default defineConfig([
   {
     // Main build step
@@ -49,8 +60,8 @@ export default defineConfig([
         useTsconfigDeclarationDir: true
       }),
       postcss({
-        modules: true,
-        extract: false
+        extract: false,
+        modules: modulesOptions
       }),
       terser()
     ],
@@ -106,8 +117,8 @@ export default defineConfig([
         }
       }),
       postcss({
-        modules: true,
-        extract: true
+        extract: true,
+        modules: modulesOptions
       }),
     ],
 
