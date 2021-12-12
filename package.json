@@ -1,6 +1,6 @@
 {
   "name": "pcake",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "files": [
     "dist"
@@ -22,7 +22,7 @@
     "serve": "vite preview",
     "tsc": "tsc",
     "lint": "eslint --ext ts --ext tsx .",
-    "preversion": "yarn lint && yarn build",
+    "preversion": "yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
