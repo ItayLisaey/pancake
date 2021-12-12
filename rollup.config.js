@@ -68,7 +68,8 @@ export default defineConfig([
       }),
       postcss({
         extract: false,
-        modules: modulesOptions
+        modules: modulesOptions,
+        minimize: true
       }),
       terser()
     ],
@@ -110,7 +111,7 @@ export default defineConfig([
     ]
   },
   {
-    // Extract bundled css (for potential SSR support)
+    // Extract bundled css (for SSR support)
     input: join(lib, 'index.ts'),
     external: externals,
 
@@ -125,8 +126,10 @@ export default defineConfig([
       }),
       postcss({
         extract: true,
-        modules: modulesOptions
+        modules: modulesOptions,
+        minimize: true
       }),
+      terser()
     ],
 
     output: {
