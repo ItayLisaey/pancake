@@ -56,6 +56,13 @@ export default defineConfig([
     input: join(lib, 'index.ts'),
     external: externals,
     plugins: [
+      replace({
+        // Mimic Vite's static replacement behaviour
+        'import.meta.env.MODE': JSON.stringify('production'),
+        'import.meta.env.DEV': false,
+        'import.meta.env.PROD': true,
+        preventAssignment: true
+      }),
       typescript({
         useTsconfigDeclarationDir: true
       }),
