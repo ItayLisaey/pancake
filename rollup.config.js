@@ -72,7 +72,7 @@ export default defineConfig([
     // Bundle d.ts files into one
     input: '.temp/lib/index.d.ts',
     output: {
-      file: join(dist, 'index.d.ts'),
+      file: join(dist, 'pcake.d.ts'),
       format: 'es',
       globals: {
         react: 'React'
